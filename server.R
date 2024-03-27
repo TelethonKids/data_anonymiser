@@ -61,7 +61,7 @@ server <- function(input, output, session) {
       req(data())
       original_data <- data()[, input$columns, drop = FALSE]
       original_report <- original_data %>% 
-        select(where(~length(unique(.)) <= 15)) %>% 
+        select(where(~length(unique(.)) <= 15 | is.numeric(.)) ) %>% 
         tbl_summary()
       gt_output_original <- as_gt(original_report)
       gt_output_original
@@ -71,7 +71,7 @@ server <- function(input, output, session) {
       req(anonymized_data())
       new_data <- anonymized_data()
       anonymized_report <- new_data %>% 
-        select(where(~length(unique(.)) <= 15)) %>% 
+        select(where(~length(unique(.)) <= 15 | is.numeric(.)) ) %>% 
         tbl_summary()
       gt_output_anonymized <- as_gt(anonymized_report)
       gt_output_anonymized
