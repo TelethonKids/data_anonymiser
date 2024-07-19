@@ -1,5 +1,7 @@
 # Data Anonymiser - Shiny App
 
+![](./www/app_preview.png)
+
 Contained in this repo is a shiny app and a test dataset (.xlsx). The shiny app will:
 
 - take an uploaded dataset (.csv or .xlsx), 
@@ -8,7 +10,7 @@ Contained in this repo is a shiny app and a test dataset (.xlsx). The shiny app 
 
 A report is also provided, comparing the original data to the obscured data.
 
-![](./www/app_preview.png)
+![](./www/example_img.png)
 
 ## Purpose
 
