@@ -55,7 +55,8 @@ body <- dashboardBody(useShinyjs(), # Initialize shinyjs
             <li><strong>More than 15 unique categories: </strong><i>(For example studyIDs, names, addresses etc) </i>these will be replaced with a random string of length 6 (may or may not be unique).</li>
         </ul>
     </li>
-</ul>'
+</ul><br><br>
+               Version: 2024-07-19'
              )
                                  )),
 tabPanel(

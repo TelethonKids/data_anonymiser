@@ -43,11 +43,22 @@ server <- function(input, output, session) {
       mutate(across(where(is.factor), ~factor(sample(LETTERS[1:length(unique(.))], n(), replace = TRUE)))) %>%
       mutate(across(where(~is.character(.) && length(unique(.)) <= 15), ~factor(sample(LETTERS[1:length(unique(.))], n(), replace = TRUE)))) %>%
       mutate(across(where(~is.character(.) && length(unique(.)) > 15), ~stri_rand_strings(n(), 6))) %>%
+      mutate(across(where(is.POSIXct), function(x) {
+        start_time <- min(x, na.rm = TRUE)
+        start_time <- start_time + days(round(rnorm(1,0,100)))
+        end_time <- max(x, na.rm = TRUE)
+        time_diff <- as.integer(end_time - start_time)
+        sample_times <- start_time + days(sample(0:time_diff, n(), replace = TRUE))
+        sample_times <- sample_times + seconds(round(rnorm(n(),0,20000)))
+        return(sample_times)
+      })) %>% 
       mutate(across(where(is.Date), function(x) {
         start_date <- min(x, na.rm = TRUE)
+        start_date <- start_date + days(round(rnorm(1,0,100)))
         end_date <- max(x, na.rm = TRUE)
         days_diff <- as.integer(end_date - start_date)
         sample_dates <- start_date + days(sample(0:days_diff, n(), replace = TRUE))
+        sample_dates <- ymd(sample_dates)
         return(sample_dates)
       }))
     
